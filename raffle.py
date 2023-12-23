@@ -1,9 +1,6 @@
 import random
 import smtplib
 from email.message import EmailMessage
-import imaplib
-import email.message
-from email import policy
 
 
 def login(server):
@@ -20,24 +17,19 @@ def sendResult(to,text):
         server.send_message(msg)
 
 def shuffle_users(participants):
-    receivers = participants.copy()
-    random.shuffle(receivers)
-    givers = participants.copy()
-    random.shuffle(givers)
-    pairs = list(zip(givers, receivers))
-    return pairs
+    users = participants.copy()
+    random.shuffle(users)
+    return users
 
     
 
-def raffle(participants):
-    arrayInequality = True
-    pairs = shuffle_users(participants)
-    for i in range(len(pairs)):
-        if pairs[i][0] == pairs[i][1]:
-            arrayInequality = False
-    if arrayInequality :
-        for receiver,giver in pairs:
-            sendResult(giver['email'],f"You are giving gift to {receiver['username']}")
-    else:
-        raffle(participants)
- 
+def raffle(participants):    
+    users = shuffle_users(participants)
+    for i in range(len(users)):
+        if i < len(users)-1:
+            print(f"{users[i]['email']} gives to {users[i+1]['email']}")
+            sendResult(users[i]['email'],f"You are giving gift to {users[i+1]['email']}")
+        else:
+            print(f"{users[i]['email']} gives to {users[0]['email']}")
+            sendResult(users[i]['email'],f"You are giving gift to {users[0]['email']}")
+    
