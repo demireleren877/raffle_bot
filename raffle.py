@@ -4,7 +4,7 @@ from email.message import EmailMessage
 
 
 def login(server):
-    server.login("demireleren1903@gmail.com", "****************")
+    server.login("demireleren1903@gmail.com", "usfdopgeawkmmlex")
 
 def sendResult(to,text):
     msg = EmailMessage()
