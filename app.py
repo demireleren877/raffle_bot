@@ -4,6 +4,7 @@ import raffle
 app = Flask(__name__)
 users = []
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
